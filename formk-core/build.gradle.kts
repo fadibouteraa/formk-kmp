@@ -1,5 +1,6 @@
 plugins {
     kotlin("multiplatform")
+    kotlin("plugin.serialization")
 }
 
 kotlin {
@@ -8,7 +9,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                // Core has no external dependencies unless necessary
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:1.6.3")
             }
         }
     }
