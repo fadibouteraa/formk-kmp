@@ -82,23 +82,25 @@ fun LoginScreen(viewModel: LoginViewModel) {
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Global Status Display
-        when (state.status) {
-            is FormSubmissionStatus.Success -> {
-                Text(
-                    text = "Login Successful!",
-                    color = MaterialTheme.colors.primary,
-                    style = MaterialTheme.typography.h6
-                )
-            }
-            is FormSubmissionStatus.Failure -> {
-                Text(
-                    text = "Login Failed: ${(state.status as FormSubmissionStatus.Failure).message}",
-                    color = MaterialTheme.colors.error,
-                    style = MaterialTheme.typography.body1
-                )
-            }
-            else -> {}
+        // Global Status Display (Explicitly shown for the demo video)
+        Text(
+            text = "Status: ${state.status::class.simpleName}",
+            color = when (state.status) {
+                is FormSubmissionStatus.Success -> MaterialTheme.colors.primary
+                is FormSubmissionStatus.Failure -> MaterialTheme.colors.error
+                is FormSubmissionStatus.InProgress -> MaterialTheme.colors.secondary
+                else -> MaterialTheme.colors.onSurface.copy(alpha = 0.6f)
+            },
+            style = MaterialTheme.typography.h6,
+            modifier = Modifier.padding(top = 16.dp)
+        )
+        
+        if (state.status is FormSubmissionStatus.Failure) {
+            Text(
+                text = "Message: ${(state.status as FormSubmissionStatus.Failure).message}",
+                color = MaterialTheme.colors.error,
+                style = MaterialTheme.typography.body2
+            )
         }
     }
 }
