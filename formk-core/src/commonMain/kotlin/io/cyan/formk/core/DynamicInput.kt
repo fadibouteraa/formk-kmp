@@ -1,7 +1,4 @@
-package io.cyan.formk.inputs
-
-import io.cyan.formk.core.CachedFormkInput
-import io.cyan.formk.core.FieldValidationConfig
+package io.cyan.formk.core
 
 enum class DynamicValidationError {
     Empty, TooShort, TooLong, PatternMismatch

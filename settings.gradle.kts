@@ -15,5 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "formk-kmp"
 include(":formk-core")
-include(":formk-inputs")
 include(":sample")

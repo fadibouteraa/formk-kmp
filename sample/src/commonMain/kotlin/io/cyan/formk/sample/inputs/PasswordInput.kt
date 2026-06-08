@@ -1,4 +1,4 @@
-package io.cyan.formk.inputs
+package io.cyan.formk.sample.inputs
 
 import io.cyan.formk.core.FormkInput
 
