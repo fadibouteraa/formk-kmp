@@ -1,5 +1,9 @@
 # Formk Kotlin Multiplatform (KMP)
 
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.fadibouteraa/formk-core.svg?label=Maven%20Central)](https://central.sonatype.com/artifact/io.github.fadibouteraa/formk-core)
+[![Kotlin](https://img.shields.io/badge/kotlin-multiplatform-blue.svg?logo=kotlin)](http://kotlinlang.org)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 ## 🌟 Introduction
 **Formk** is a pure Kotlin, UI-agnostic library for standardizing form validation across your Kotlin Multiplatform (KMP) projects (Android, iOS via Compose Multiplatform, Desktop, Web). Strongly inspired by the famous `formz` package in the Flutter ecosystem.
 
