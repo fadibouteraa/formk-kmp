@@ -11,7 +11,7 @@ class EmailInput(
 
     override fun validator(value: String): EmailValidationError? = when {
         value.isEmpty() -> EmailValidationError.Empty
-        !Regex("^[A-Za-z0-9+_.-]+@(.+)$").matches(value) -> EmailValidationError.InvalidFormat
+        !Regex("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$").matches(value) -> EmailValidationError.InvalidFormat
         else -> null
     }
 
