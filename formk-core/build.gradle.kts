@@ -1,8 +1,7 @@
 plugins {
-    `maven-publish`
-    signing
     kotlin("multiplatform")
     kotlin("plugin.serialization")
+    id("com.vanniktech.maven.publish") version "0.29.0"
 }
 
 kotlin {
@@ -22,64 +21,40 @@ kotlin {
     }
 }
 
-
-group = "io.github.fadibouteraa.formk"
+group = "io.github.fadibouteraa"
 version = "1.0.0"
 
-// Setup Dokka if we want javadoc jars, but for now we'll just use empty jars or simple jar tasks to pass Sonatype requirements
-val javadocJar by tasks.registering(Jar::class) {
-    archiveClassifier.set("javadoc")
-}
+mavenPublishing {
+    coordinates("io.github.fadibouteraa", "formk-core", "1.0.0")
 
-publishing {
-    publications.withType<MavenPublication> {
-        artifact(javadocJar)
-        
-        pom {
-            name.set("Formk")
-            description.set("A pure Kotlin, UI-agnostic library for standardizing form validation across KMP.")
+    pom {
+        name.set("Formk")
+        description.set("A pure Kotlin, UI-agnostic library for standardizing form validation across KMP.")
+        inceptionYear.set("2024")
+        url.set("https://github.com/fadibouteraa/formk-kmp")
+        licenses {
+            license {
+                name.set("The MIT License")
+                url.set("https://opensource.org/licenses/MIT")
+            }
+        }
+        developers {
+            developer {
+                id.set("fadibouteraa")
+                name.set("Fadi Bouteraa")
+                url.set("https://github.com/fadibouteraa/")
+            }
+        }
+        scm {
             url.set("https://github.com/fadibouteraa/formk-kmp")
-            
-            licenses {
-                license {
-                    name.set("MIT License")
-                    url.set("https://opensource.org/licenses/MIT")
-                }
-            }
-            developers {
-                developer {
-                    id.set("fadibouteraa")
-                    name.set("Fadi Bouteraa")
-                    email.set("fadi@example.com")
-                }
-            }
-            scm {
-                connection.set("scm:git:git://github.com/fadibouteraa/formk-kmp.git")
-                developerConnection.set("scm:git:ssh://github.com/fadibouteraa/formk-kmp.git")
-                url.set("https://github.com/fadibouteraa/formk-kmp")
-            }
+            connection.set("scm:git:git://github.com/fadibouteraa/formk-kmp.git")
+            developerConnection.set("scm:git:ssh://git@github.com/fadibouteraa/formk-kmp.git")
         }
     }
-    
-    repositories {
-        maven {
-            name = "OSSRH"
-            val releasesRepoUrl = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
-            val snapshotsRepoUrl = uri("https://s01.oss.sonatype.org/content/repositories/snapshots/")
-            url = if (version.toString().endsWith("SNAPSHOT")) snapshotsRepoUrl else releasesRepoUrl
-            
-            credentials {
-                username = System.getenv("OSSRH_USERNAME")
-                password = System.getenv("OSSRH_PASSWORD")
-            }
-        }
-    }
-}
 
-signing {
-    val signingKeyId = System.getenv("SIGNING_KEY_ID")
-    val signingKey = System.getenv("SIGNING_KEY")
-    val signingPassword = System.getenv("SIGNING_PASSWORD")
-    useInMemoryPgpKeys(signingKeyId, signingKey, signingPassword)
-    sign(publishing.publications)
+    // Publish to the NEW Sonatype Central Portal
+    publishToMavenCentral(com.vanniktech.maven.publish.SonatypeHost.CENTRAL_PORTAL)
+
+    // Automatically handles signing
+    signAllPublications()
 }
