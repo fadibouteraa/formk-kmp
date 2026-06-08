@@ -36,7 +36,31 @@ abstract class FormkInput<T, E>(
 }
 ```
 
-### 2. `DynamicInput`
+### 2. Custom Inputs
+While you can use `DynamicInput`, you can also create highly specialized inputs for your domain by extending `FormkInput`. Here is an example of a custom `PasswordInput`:
+
+```kotlin
+enum class PasswordValidationError { Empty, TooShort }
+
+class PasswordInput private constructor(
+    value: String,
+    isPure: Boolean
+) : FormkInput<String, PasswordValidationError>(value, isPure) {
+
+    constructor() : this("", isPure = true)
+
+    fun dirty(newValue: String) = PasswordInput(newValue, isPure = false)
+    fun markDirty() = PasswordInput(value, isPure = false)
+
+    override fun validator(value: String): PasswordValidationError? = when {
+        value.isBlank() -> PasswordValidationError.Empty
+        value.length < 6 -> PasswordValidationError.TooShort
+        else -> null
+    }
+}
+```
+
+### 3. `DynamicInput`
 Built-in into `formk-core`, it provides dynamic, configuration-driven validation using `FieldValidationConfig`. 
 
 ```kotlin
@@ -48,7 +72,7 @@ val input = DynamicInput(emailConfig).dirty("test@example.com")
 println(input.isValid) // true
 ```
 
-### 3. `FormkMixin`
+### 4. `FormkMixin`
 An interface applied to your screen's `UiState`. It automatically computes the global validity of the entire form by aggregating all inputs.
 
 ```kotlin
@@ -58,7 +82,7 @@ interface FormkMixin {
 }
 ```
 
-### 4. `FormSubmissionStatus`
+### 5. `FormSubmissionStatus`
 A sealed class representing the lifecycle of the form submission, essential for displaying loaders or global error messages (`Initial`, `InProgress`, `Success`, `Failure`).
 
 ---
