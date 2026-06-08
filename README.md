@@ -4,7 +4,7 @@
 **Formk** is a pure Kotlin, UI-agnostic library for standardizing form validation across your Kotlin Multiplatform (KMP) projects (Android, iOS via Compose Multiplatform, Desktop, Web). Strongly inspired by the famous `formz` package in the Flutter ecosystem.
 
 ### Demo
-![Formk Sample Demo](demo/formk-sample.mp4)
+<video src="demo/formk-sample.mp4" controls="controls" style="max-width: 100%;"></video>
 
 ---
 
