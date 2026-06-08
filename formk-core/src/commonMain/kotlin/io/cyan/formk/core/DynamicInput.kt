@@ -1,15 +1,30 @@
 package io.cyan.formk.core
 
+/**
+ * Predefined validation errors for [DynamicInput].
+ */
 enum class DynamicValidationError {
     Empty, TooShort, TooLong, PatternMismatch
 }
 
+/**
+ * A highly reusable and dynamic implementation of [CachedFormkInput].
+ * 
+ * Validates the input string based on rules provided by a [FieldValidationConfig].
+ *
+ * @property config The validation rules to apply to this input.
+ */
 class DynamicInput private constructor(
     value: String,
     isPure: Boolean,
     val config: FieldValidationConfig
 ) : CachedFormkInput<String, DynamicValidationError>(value, isPure) {
 
+    /**
+     * Creates a pure [DynamicInput] with an empty string and the given configuration.
+     * 
+     * @param config The validation configuration. Defaults to an empty configuration.
+     */
     constructor(config: FieldValidationConfig = FieldValidationConfig())
         : this("", isPure = true, config)
 
@@ -19,8 +34,22 @@ class DynamicInput private constructor(
         }
     }
 
+    /**
+     * Returns a new dirty [DynamicInput] with the updated value.
+     * 
+     * @param newValue The new value provided by the user.
+     */
     fun dirty(newValue: String) = DynamicInput(newValue, isPure = false, config)
+
+    /**
+     * Returns a new dirty [DynamicInput] keeping the current value.
+     * Useful for triggering validation displays on untouched fields during form submission.
+     */
     fun markDirty() = DynamicInput(value, isPure = false, config)
+
+    /**
+     * Returns a new pure [DynamicInput] initialized with the given [newConfig].
+     */
     fun withConfig(newConfig: FieldValidationConfig) = DynamicInput("", isPure = true, newConfig)
 
     override fun validator(value: String): DynamicValidationError? {
