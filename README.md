@@ -8,6 +8,20 @@
 
 ---
 
+## 📥 Installation
+
+Available on **Maven Central**. Add the dependency to your Kotlin Multiplatform `build.gradle.kts`:
+
+```kotlin
+sourceSets {
+    commonMain.dependencies {
+        implementation("io.github.fadibouteraa:formk-core:1.0.0")
+    }
+}
+```
+
+---
+
 ## 🛠️ Design Philosophy
 
 The Kotlin ecosystem often sees developers mixing UI logic (Jetpack Compose states) with business validation rules, leading to spaghetti code that is hard to test and impossible to share across platforms.
