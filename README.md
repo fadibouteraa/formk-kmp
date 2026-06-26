@@ -19,7 +19,7 @@ Available on **Maven Central**. Add the dependency to your Kotlin Multiplatform 
 ```kotlin
 sourceSets {
     commonMain.dependencies {
-        implementation("io.github.fadibouteraa:formk-core:1.0.0")
+        implementation("io.github.fadibouteraa:formk-core:1.0.1")
     }
 }
 ```
