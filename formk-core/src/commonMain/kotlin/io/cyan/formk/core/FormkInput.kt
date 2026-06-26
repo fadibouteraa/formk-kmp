@@ -35,7 +35,8 @@ abstract class FormkInput<T, E>(
     val displayError: E? get() = if (isPure) null else error
 
     override fun equals(other: Any?): Boolean {
-        if (other?.javaClass != javaClass) return false
+        if (this === other) return true
+        if (other == null || this::class != other::class) return false
         other as FormkInput<*, *>
         return other.value == value && other.isPure == isPure
     }
