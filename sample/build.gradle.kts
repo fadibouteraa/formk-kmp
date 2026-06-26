@@ -22,7 +22,7 @@ kotlin {
         }
         val commonMain by getting {
             dependencies {
-                implementation("io.github.fadibouteraa:formk-core:1.0.0")
+                implementation("io.github.fadibouteraa:formk-core:1.0.1")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
                 implementation(compose.runtime)
                 implementation(compose.foundation)

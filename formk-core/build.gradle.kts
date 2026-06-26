@@ -7,6 +7,22 @@ plugins {
 kotlin {
     jvm()
     
+    wasmJs {
+        browser()
+    }
+    js(IR) {
+        browser()
+    }
+    
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
+    
+    macosX64()
+    macosArm64()
+    
+    linuxX64()
+    
     sourceSets {
         val commonMain by getting {
             dependencies {
@@ -22,10 +38,10 @@ kotlin {
 }
 
 group = "io.github.fadibouteraa"
-version = "1.0.0"
+version = "1.0.1"
 
 mavenPublishing {
-    coordinates("io.github.fadibouteraa", "formk-core", "1.0.0")
+    coordinates("io.github.fadibouteraa", "formk-core", "1.0.1")
 
     pom {
         name.set("Formk")
